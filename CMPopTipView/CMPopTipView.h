@@ -2,7 +2,7 @@
 //  CMPopTipView.h
 //
 //  Created by Chris Miles on 18/07/10.
-//  Copyright (c) Chris Miles 2010-2013.
+//  Copyright (c) Chris Miles 2010-2012.
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -24,7 +24,7 @@
 //
 
 /*
-	Version: 2.0a1
+	Version: 1.2.0
  */
 
 
@@ -103,31 +103,50 @@ typedef enum {
 @protocol CMPopTipViewDelegate;
 
 
-@interface CMPopTipView : UIView
+@interface CMPopTipView : UIView {
+	UIColor					*backgroundColor;
+	id<CMPopTipViewDelegate>	delegate;
+    NSString                *title;
+	NSString				*message;
+	id						targetObject;
+    UIColor                 *titleColor;
+    UIFont                  *titleFont;
+	UIColor					*textColor;
+	UIFont					*textFont;
+    UIColor                 *borderColor;
+    CGFloat                 borderWidth;
+    CMPopTipAnimation       animation;
 
-@property (nonatomic, strong)			UIColor					*backgroundColor;
-@property (nonatomic, weak)				id<CMPopTipViewDelegate>	delegate;
+	@private
+	CGSize					bubbleSize;
+	CGFloat					cornerRadius;
+	BOOL					highlight;
+	CGFloat					sidePadding;
+	CGFloat					topMargin;
+	PointDirection			pointDirection;
+	CGFloat					pointerSize;
+	CGPoint					targetPoint;
+}
+
+@property (nonatomic, retain)			UIColor					*backgroundColor;
+@property (nonatomic, assign)		id<CMPopTipViewDelegate>	delegate;
 @property (nonatomic, assign)			BOOL					disableTapToDismiss;
 @property (nonatomic, assign)			BOOL					dismissTapAnywhere;
-@property (nonatomic, strong)			NSString				*title;
-@property (nonatomic, strong)			NSString				*message;
-@property (nonatomic, strong)           UIView	                *customView;
-@property (nonatomic, strong, readonly)	id						targetObject;
-@property (nonatomic, strong)			UIColor					*titleColor;
-@property (nonatomic, strong)			UIFont					*titleFont;
-@property (nonatomic, strong)			UIColor					*textColor;
-@property (nonatomic, strong)			UIFont					*textFont;
+@property (nonatomic, retain)			NSString				*title;
+@property (nonatomic, retain)			NSString				*message;
+@property (nonatomic, retain)           UIView	                *customView;
+@property (nonatomic, retain, readonly)	id						targetObject;
+@property (nonatomic, retain)			UIColor					*titleColor;
+@property (nonatomic, retain)			UIFont					*titleFont;
+@property (nonatomic, retain)			UIColor					*textColor;
+@property (nonatomic, retain)			UIFont					*textFont;
 @property (nonatomic, assign)			UITextAlignment			titleAlignment;
 @property (nonatomic, assign)			UITextAlignment			textAlignment;
-@property (nonatomic, assign)           BOOL                    has3DStyle;
-@property (nonatomic, strong)			UIColor					*borderColor;
-@property (nonatomic, assign)           CGFloat                 cornerRadius;
+@property (nonatomic, retain)			UIColor					*borderColor;
 @property (nonatomic, assign)			CGFloat					borderWidth;
-@property (nonatomic, assign)           BOOL                    hasShadow;
 @property (nonatomic, assign)           CMPopTipAnimation       animation;
 @property (nonatomic, assign)           CGFloat                 maxWidth;
 @property (nonatomic, assign)           PointDirection          preferredPointDirection;
-@property (nonatomic, assign)           BOOL                    hasGradientBackground;
 
 /* Contents can be either a message or a UIView */
 - (id)initWithTitle:(NSString *)titleToShow message:(NSString *)messageToShow;
